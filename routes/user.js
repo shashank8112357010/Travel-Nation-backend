@@ -82,11 +82,15 @@ router.post ('/login', (request, response, next) => {
 
 //Mailinator Email Verification
 var transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    secure: true,
+    port: 465,
     auth: {
         user: process.env.EMAIL,
-        pass: process.env.PASSWORD
-    }
+        pass: process.env.PASSWORD,
+        type: 'login'
+    },
+  
 });
 
 //Forget password for travel website
@@ -97,7 +101,7 @@ router.post('/forget-password', (request, response, next) => {
         if (!error) {
             if (result.length <= 0) {
                 return response.status(403).json({
-                    message: 'You are not authorized !'
+                    message: 'Email address does not exist !'
                 })
             }
             else {
@@ -108,6 +112,15 @@ router.post('/forget-password', (request, response, next) => {
                     html: '<p><b>Your login credentials: </b><br><b>Email - </b>'+result[0].email+'<br><b>Password - </b>'+result[0].password+'</p>'
                 };
                 console.log('MAILING OPTIONS -----------------------', mailOptions);
+
+                transporter.verify(function (error, success) {
+                    if (error) {
+                      console.log("error",error);
+                    } else {
+                      console.log("Server is ready to take our messages");
+                    }
+                  });
+
                 transporter.sendMail(mailOptions, function(err, info) {
                     if(err) {
                         console.log('ERROR -------------------', err);
@@ -134,6 +147,24 @@ router.post('/forget-password', (request, response, next) => {
 router.get('/check-token', (request, response, next) => {
     return response.status(200).json({
         message: '- VALID TOKEN -'
+    })
+})
+
+
+//To get all the palces for travel website
+router.get('/best-of-india', (request, response, next) => {
+    var query = "select id, place, image, description from bestofindia";
+    connection.query(query, (error, result) => {
+        if (!error) {
+            return response.status(200).json({
+                message: 'Places fetched successfully !',
+                success: true,
+                result: result
+            })
+        }
+        else {
+            return response.status(500).json(error)
+        }
     })
 })
 

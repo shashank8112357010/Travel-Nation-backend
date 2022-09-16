@@ -9,7 +9,15 @@ create table user(
     UNIQUE (email)
 );
 
+create table bestofindia(
+        id int primary key AUTO_INCREMENT,
+        place varchar(255) not null,
+        Img  varbinary(100000) not null,
+		discription varchar(255) not null
+);
+
 insert into user(name, contactNumber, email, password, status, role) values('Admin', '+91 76070 70646', 'admin@gmail.com', 'admin', 'true', 'admin');
+insert into bestofindia(place, image, description) values('Lucknow', 'https://www.pexels.com/photo/photo-of-mosque-during-daytime-337904/', 'Bara Imam bara');
 
 
 create table category(
