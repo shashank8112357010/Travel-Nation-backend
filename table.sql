@@ -19,6 +19,7 @@ create table bestofindia(
 
 create table packages (
         id int primary key AUTO_INCREMENT,
+        image varchar(255) not null,
         package_title varchar(255) not null,
         package_type varchar(100) not null,
         rating int not null ,
@@ -29,7 +30,7 @@ create table packages (
         discount int not null,
         location varchar(255) not null
 )
-insert into packages(package_title, package_type, rating, average_rating, old_pricr, new_price, package_duration, discount, location) values('Family getaway to Ladakh', 'Executive', 5, 26, 8000.99, 5200.99, '5 Days, 4 Night' , 55, 'Leh');
+insert into packages(image, package_title, package_type, rating, average_rating, old_price, new_price, package_duration, discount, location) values('', 'Family getaway to Ladakh', 'Executive', 5, 26, 8000.99, 5200.99, '5 Days, 4 Night' , 55, 'Leh');
 
 
 insert into user(name, contactNumber, email, password, status, role) values('Admin', '+91 76070 70646', 'admin@gmail.com', 'admin', 'true', 'admin');
@@ -51,7 +52,16 @@ create table product(
     price integer not null,
     status varchar(255),
     primary key (id)
+);
 
+create table enquiry(
+    id int primary key AUTO_INCREMENT,
+    name varchar(255) not null,
+    email varchar(255) not null,
+    phone varchar(255) not null,
+    date varchar(255) not null,
+    no_of_people int not null,
+    message varchar(255) not null
 );
 
 
