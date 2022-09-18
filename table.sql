@@ -16,6 +16,22 @@ create table bestofindia(
 		discription varchar(255) not null
 );
 
+
+create table packages (
+        id int primary key AUTO_INCREMENT,
+        package_title varchar(255) not null,
+        package_type varchar(100) not null,
+        rating int not null ,
+        average_rating int not null,
+        old_pricr float not null,
+        new_price float not null,
+        package_duration varchar(255) not null,
+        discount int not null,
+        location varchar(255) not null
+)
+insert into packages(package_title, package_type, rating, average_rating, old_pricr, new_price, package_duration, discount, location) values('Family getaway to Ladakh', 'Executive', 5, 26, 8000.99, 5200.99, '5 Days, 4 Night' , 55, 'Leh');
+
+
 insert into user(name, contactNumber, email, password, status, role) values('Admin', '+91 76070 70646', 'admin@gmail.com', 'admin', 'true', 'admin');
 insert into bestofindia(place, image, description) values('Lucknow', 'https://www.pexels.com/photo/photo-of-mosque-during-daytime-337904/', 'Bara Imam bara');
 
@@ -51,3 +67,6 @@ create table bill(
     createdBy varchar(255) not null,
     primary key (id)
 );
+
+
+//on no body, data is going empty
